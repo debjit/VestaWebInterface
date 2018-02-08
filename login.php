@@ -167,7 +167,10 @@ if(isset($_SESSION['loggedin'])) {
                                 // Check result
                                 if($answer == "OK") {
                                     $_SESSION['loggedin'] = base64_encode ( 'true' );
-                                    $_SESSION['username'] = base64_encode ( $username2 );
+                                    $_SESSION['userame'] = base64_encode ( $username2 );
+                                    
+                                    if ($_SESSION['username'] == "admin") { $userredirect = 'admin/index.php'; }
+                                    else { $userredirect = 'admin/index.php'; }
                                     
                                     echo '<br><br>
                                         <div style="color: #000;" class="alert alert-success alert-dismissable">
@@ -176,7 +179,7 @@ if(isset($_SESSION['loggedin'])) {
                                             </button>
                                             <span style="opacity: 0.7;">' . _("Loading Dashboard") . '...</span>
                                         </div>
-                                        <script>setTimeout(function(){ window.location = "index.php";}, 100);</script>';
+                                        <script>setTimeout(function(){ window.location = "' . $userredirect . '";}, 100);</script>';
                                 } else {
                                     echo '<br><br><div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' . _("Error: Incorrect Login.") . '</div>';
                                 }}}
